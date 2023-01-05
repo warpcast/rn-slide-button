@@ -53,7 +53,7 @@ interface SlideButtonProps extends SlideButtonPropsExtends {
   disabled?: boolean;
   completeThreshold?: number;
   onSlideStart?: () => void;
-  onSlideEnd?: () => void;
+  onSlideEnd?: (complete: boolean) => void;
   onReachedToStart?: () => void;
   onReachedToEnd?: () => void;
   underlayStyle?: StyleProp<ViewStyle>;
@@ -249,7 +249,7 @@ const SlideButton = ({
         return;
       }
 
-      runOnJS(onSlideEnd!)();
+      runOnJS(onSlideEnd!)(dragX.value > slideThreshold);
 
       if (isRTL) {
         if (dragX.value > slideThreshold) {
